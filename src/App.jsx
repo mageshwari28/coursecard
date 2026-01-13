@@ -1,22 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Course from './Course'
-import html from "./assets/html.jpeg"
-import css from "./assets/css.jpeg"
-import js from "./assets/js.jpeg"
-import Courselist from './Courselist'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Courselist from "./Courselist";
+import Sidebar from "./Sidebar";
 import { Toaster } from "react-hot-toast";
 
-function App() {
-  
-  return (
-    <div className='card-main'>
-      <Toaster position="top-right" />
-    <Courselist/>
-    </div>
-  )
+function Dashboard() {
+  return <h1 className="text-2xl font-bold">Dashboard Page</h1>;
 }
 
-export default App
+function POS() {
+  return <h1 className="text-2xl font-bold">POS Page</h1>;
+}
+
+function App() {
+  return (
+    <Router>
+      <Toaster position="top-right" />
+
+      <div className="flex min-h-screen ">
+        
+        {/* LEFT SIDEBAR */}
+        <Sidebar />
+
+        {/* RIGHT CONTENT */}
+        <div className="flex-1 p-6">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/pos" element={<POS />} />
+            <Route path="/courses" element={<Courselist />} />
+          </Routes>
+        </div>
+
+      </div>
+    </Router>
+  );
+}
+
+export default App;
